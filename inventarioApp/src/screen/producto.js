@@ -53,10 +53,12 @@ export default function ListUser({ navigation }) {
             .required('El precio de venta es obligatorio'),
         stock: Yup.number()
             .required('El stock es obligatorio')
-            .test('is-not-negative', 'El stock debe ser un número no negativo', value => value >= 0),
+            .test('is-not-negative', 'El stock debe ser un número no negativo', value => value >= 0)
+            .moreThan(0, 'El stock debe ser mayor que 0'),
         stockMin: Yup.number()
             .required('El stock mínimo es obligatorio')
-            .test('is-not-negative', 'El stock mínimo debe ser un número no negativo', value => value >= 0),
+            .test('is-not-negative', 'El stock mínimo debe ser un número no negativo', value => value >= 0)
+            .moreThan(0, 'El stock debe ser mayor que 0'),
         ProveedoresID: Yup.number().required('El proveedor es obligatorio'),
         categoriasID: Yup.number().required('La categoría es obligatoria'),
     });
