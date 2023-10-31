@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native'
 import Animated, { FadeIn, FadeInDown, FadeInUp } from 'react-native-reanimated';
 import * as yup from 'yup'
 import app from '../../database/firebase';
-import { getAuth, signInWithEmailAndPassword, inMemoryPersistence, setPersistence } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword, inMemoryPersistence, setPersistence,createUserWithEmailAndPassword } from 'firebase/auth';
 import { useFormik } from 'formik';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -28,12 +28,16 @@ export default function SignupScreen() {
     });
 
 
+    const saveValueFunction = (email) => {       
+        AsyncStorage.setItem('email', email); 
+};
 
     const handleSignUp = (email, password) => {
 
         createUserWithEmailAndPassword(auth, email, password)
             .then(userCredentials => {
                 const user = userCredentials.user;
+                saveValueFunction(user.email);
                 console.log('Registered with:', user.email);
             })
             .catch(error => alert(error.message))
