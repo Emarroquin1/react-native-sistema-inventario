@@ -1,4 +1,4 @@
-import { FlatList, Text, StyleSheet, View } from "react-native";
+import { FlatList, Text, StyleSheet, View, Image } from "react-native";
 import { useState } from "react";
 import { ListItem } from "../../components/ListItem";
 
@@ -15,6 +15,13 @@ export function Inicio() {
 
       <Text style={styles.title}>Bienvenido estimado usuario.</Text>
 
+      <View style={styles.imageContainer}>
+      <Image
+        style={styles.image}
+        source={require('../sistemaInventarioLogo.png')} // Reemplaza con la ruta de tu imagen
+      />
+    </View>
+    
       <Text style={styles.Text}>
         Nos complace darle la bienvenida a nuestro Sistema de Gestión de Categorías y Productos,
         la solución integral para simplificar y optimizar la gestión de productos en su negocio.
@@ -46,5 +53,14 @@ const styles = StyleSheet.create({
     marginLeft: '5%',
     marginRight: '5%',
     fontSize: 15, // Elige el tamaño de fuente deseado para el texto principal
+  },
+  image: {
+    width: 200, // Ancho de la imagen
+    height: 200, // Alto de la imagen
+    resizeMode: 'contain', // Puedes ajustar cómo la imagen se adapta al tamaño
+    marginBottom: 20, // Espacio entre la imagen y el texto
+  },  imageContainer: {
+    alignItems: 'center', // Centra horizontalmente
+    justifyContent: 'center', // Centra verticalmente
   },
 });
