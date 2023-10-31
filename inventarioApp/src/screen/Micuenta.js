@@ -20,6 +20,7 @@ export default function SignupScreen() {
     const handleSignOut = () => {
         console.log('Sign out');
         signOut(auth)
+        AsyncStorage.clear()
             .then(() => {
                 // Redirige al usuario a la pantalla de inicio de sesión
             })
