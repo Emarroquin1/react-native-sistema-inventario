@@ -14,12 +14,15 @@ import Registrar from './src/screen/SignupScreen';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import app from './database/firebase';
 import { getAuth, onAuthStateChanged, signOut, initializeAuth, getReactNativePersistence } from 'firebase/auth';
-import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
+import CustomAlert from './src/CustomAlert';
 
 const Menu = createDrawerNavigator();
 
 const Stack = createNativeStackNavigator();
 const auth = getAuth(app);
+
+const [alertMessage, setAlertMessage] = useState('');
+const [showAlert, setShowAlert] = useState(false);
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -33,8 +36,7 @@ const App = () => {
       unsubscribe();
     };
   }, []);
-
-
+ 
   return (
     <NavigationContainer>
       <Menu.Navigator>
@@ -50,6 +52,12 @@ const App = () => {
           // El usuario está autenticado, muestra otras opciones
           <>
 
+            <CustomAlert
+              visible={showAlert}
+              message={alertMessage}
+              onClose={() => setShowAlert(false)}
+            />
+
             <Menu.Screen name="CATEGORIAS" component={categoriaCRUD} />
             <Menu.Screen name="PRODUCTOS" component={ProductoCRUD} />
             <Menu.Screen
@@ -61,7 +69,7 @@ const App = () => {
             />
 
           </>
-        ) : (
+        ) : ( 
           // El usuario no está autenticado, muestra opciones de inicio de sesión y registro
           <>
             <Menu.Screen name="LOGIN" component={Login} />

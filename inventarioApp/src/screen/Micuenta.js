@@ -1,12 +1,11 @@
-import { View, Text, Image, SafeAreaView, TouchableOpacity, Pressable } from 'react-native'
+import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react';
-import { TextInput } from 'react-native-paper';
+
 import { StatusBar } from 'expo-status-bar'
-import { useNavigation } from '@react-navigation/native'
-import Animated, { FadeIn, FadeInDown, FadeInUp } from 'react-native-reanimated';
-import * as yup from 'yup'
+
+import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';
 import app from '../../database/firebase';
-import { getAuth, signInWithEmailAndPassword, inMemoryPersistence, setPersistence, signOut, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, signOut } from 'firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function SignupScreen() {
@@ -28,22 +27,22 @@ export default function SignupScreen() {
     };
 
 
-    const navigation = useNavigation();
+
 
     const getValueFunction = () => {
         AsyncStorage.getItem('email').then(
-        (value) =>
-        setUser(value)
-        
-        );
-        };
+            (value) =>
+                setUser(value)
 
-        
+        );
+    };
+
+
     useEffect(() => {
 
         getValueFunction();
     }, []);
-        return (
+    return (
         <View className="bg-green h-full w-full">
             <StatusBar style="light" />
             <Image className="h-full w-full absolute" source={require('../../assets/images/background.png')} />
@@ -67,7 +66,7 @@ export default function SignupScreen() {
 
                 {/* title */}
                 <View className="flex items-center">
-                    <Animated.Text 
+                    <Animated.Text
                         entering={FadeInUp.duration(1000).springify()}
                         className="mt-20 text-white font-bold tracking-wider text-5xl">
                         MI CUENTA
@@ -81,7 +80,7 @@ export default function SignupScreen() {
                         entering={FadeInDown.delay(200).duration(1000).springify()}
                         className="bg-black rounded-2xl w-full">
 
-                        <Text style={{ fontSize: 25, color: '#00E8FF',  textAlign:'center'}}>Correo: {user}</Text>
+                        <Text style={{ fontSize: 25, color: '#00E8FF', textAlign: 'center' }}>Correo: {user}</Text>
 
                     </Animated.View>
 

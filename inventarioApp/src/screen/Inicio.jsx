@@ -1,6 +1,5 @@
-import { FlatList, Text, StyleSheet, View, Image } from "react-native";
-import { useState } from "react";
-import { ListItem } from "../../components/ListItem";
+import {  Text, StyleSheet, View, Image } from "react-native";
+
 
 function Separator() {
   return (

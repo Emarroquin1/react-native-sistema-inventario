@@ -6,24 +6,28 @@ import { useNavigation } from '@react-navigation/native'
 import Animated, { FadeIn, FadeInDown, FadeInUp } from 'react-native-reanimated';
 import * as yup from 'yup'
 import app from '../../database/firebase';
-import { getAuth, signInWithEmailAndPassword, inMemoryPersistence, setPersistence, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useFormik } from 'formik';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import CustomAlert from '../CustomAlert ';
 
 export default function SignupScreen() {
 
+    const [alertMessage, setAlertMessage] = useState('');
+    const [showAlert, setShowAlert] = useState(false);
 
     const auth = getAuth(app);
-    const saveValueFunction = (email) => {       
-            AsyncStorage.setItem('email', email); 
+    const saveValueFunction = (email) => {
+        AsyncStorage.setItem('email', email);
     };
 
     const handleLogin = (email, password) => {
 
         signInWithEmailAndPassword(auth, email, password)
             .then(userCredentials => {
-                const user = userCredentials.user;       
+                const user = userCredentials.user;
                 saveValueFunction(user.email);
+            
                 console.log('Logged in with:', user.email);
 
             })
@@ -130,6 +134,12 @@ export default function SignupScreen() {
                         <TouchableOpacity onPress={() => navigation.push('Login')}>
                             <Text className="text-sky-600">Registrate</Text>
                         </TouchableOpacity>
+
+                        <CustomAlert
+                            visible={showAlert}
+                            message={alertMessage}
+                            onClose={() => setShowAlert(false)}
+                        />
 
                     </Animated.View>
                 </View>
