@@ -1,17 +1,43 @@
 import {  Text, StyleSheet, View, Image } from "react-native";
-
-
+import React, { useEffect, useState } from 'react';
+import CustomAlert from '../CustomAlert';
+import app from '../../database/firebase';
+import { getAuth, onAuthStateChanged, signOut, initializeAuth, getReactNativePersistence } from 'firebase/auth';
 function Separator() {
   return (
     <View style={{ width: "100%", height: 1, backgroundColor: "#0CFFDE" }} />
   );
 }
 
-export function Inicio() {
 
+export function Inicio() {
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+  const [user, setUser] = useState(null);
+  const auth = getAuth(app);
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+      console.log(user)
+      // Verifica si el usuario está autenticado y muestra la alerta
+      if (user) {
+        setAlertMessage(`¡Bienvenido! Has iniciado sesión exitosamente como ${user.email}.`);
+        setShowAlert(true);
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
   return (
     <View>
 
+   <CustomAlert
+              visible={showAlert}
+              message={alertMessage}
+              onClose={() => setShowAlert(false)}
+            />
       <Text style={styles.title}>Bienvenido estimado usuario.</Text>
 
       <View style={styles.imageContainer}>

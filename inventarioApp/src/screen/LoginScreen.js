@@ -9,7 +9,7 @@ import app from '../../database/firebase';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useFormik } from 'formik';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import CustomAlert from '../CustomAlert ';
+import CustomAlert from '../CustomAlert';
 
 export default function SignupScreen() {
 
@@ -27,7 +27,8 @@ export default function SignupScreen() {
             .then(userCredentials => {
                 const user = userCredentials.user;
                 saveValueFunction(user.email);
-            
+                setAlertMessage(`¡Bienvenido!`);
+                setShowAlert(true);
                 console.log('Logged in with:', user.email);
 
             })

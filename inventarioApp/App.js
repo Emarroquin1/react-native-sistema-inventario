@@ -21,15 +21,17 @@ const Menu = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
 const auth = getAuth(app);
 
-const [alertMessage, setAlertMessage] = useState('');
-const [showAlert, setShowAlert] = useState(false);
+
 
 const App = () => {
+
+ 
   const [user, setUser] = useState(null);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
+ 
     });
 
     return () => {
@@ -52,11 +54,7 @@ const App = () => {
           // El usuario está autenticado, muestra otras opciones
           <>
 
-            <CustomAlert
-              visible={showAlert}
-              message={alertMessage}
-              onClose={() => setShowAlert(false)}
-            />
+         
 
             <Menu.Screen name="CATEGORIAS" component={categoriaCRUD} />
             <Menu.Screen name="PRODUCTOS" component={ProductoCRUD} />
@@ -78,6 +76,7 @@ const App = () => {
         )}
       </Menu.Navigator>
     </NavigationContainer>
+    
   );
 };
 
