@@ -14,7 +14,7 @@ import Registrar from './src/screen/SignupScreen';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import app from './database/firebase';
 import { getAuth, onAuthStateChanged, signOut, initializeAuth, getReactNativePersistence } from 'firebase/auth';
-import CustomAlert from './src/CustomAlert';
+
 
 const Menu = createDrawerNavigator();
 
@@ -43,7 +43,7 @@ const App = () => {
     <NavigationContainer>
       <Menu.Navigator>
         <Menu.Screen
-          name="Inicio"
+          name="INICIO"
           options={{
             headerTitle: "INICIO",
           }}

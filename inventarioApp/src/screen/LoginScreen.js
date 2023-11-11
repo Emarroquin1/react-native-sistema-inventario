@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { TextInput } from 'react-native-paper';
 import { StatusBar } from 'expo-status-bar'
 import { useNavigation } from '@react-navigation/native'
+import Registrar from '../../src/screen/SignupScreen';
 import Animated, { FadeIn, FadeInDown, FadeInUp } from 'react-native-reanimated';
 import * as yup from 'yup'
 import app from '../../database/firebase';
@@ -132,9 +133,11 @@ export default function SignupScreen() {
                         className="flex-row justify-center  mb-20">
 
                         <Text>No tienes una cuenta? </Text>
-                        <TouchableOpacity onPress={() => navigation.push('Login')}>
-                            <Text className="text-sky-600">Registrate</Text>
-                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => navigation.navigate('REGISTRAR')}>
+                    <Text className="text-sky-600">Registrate</Text>
+                </TouchableOpacity>
+
+
 
                         <CustomAlert
                             visible={showAlert}

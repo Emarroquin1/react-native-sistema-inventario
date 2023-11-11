@@ -131,7 +131,7 @@ export default function SignupScreen() {
                         className="flex-row justify-center  mb-20">
 
                         <Text>Ya tienes una cuenta? </Text>
-                        <TouchableOpacity onPress={() => navigation.push('Login')}>
+                        <TouchableOpacity onPress={() => navigation.navigate('LOGIN')}>
                             <Text className="text-sky-600">Iniciar Sesión</Text>
                         </TouchableOpacity>
 
